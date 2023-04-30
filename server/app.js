@@ -9,7 +9,7 @@ const http = require('http')
 const server = http.createServer(app)
 
 app.get('/', (req, res)=> {
-    res.sendFile(`${datosDir}/index.html`)
+    res.sendFile(`${datosDir}/cliente.html`)
 })
 
 server.listen(5050, ()=>{
