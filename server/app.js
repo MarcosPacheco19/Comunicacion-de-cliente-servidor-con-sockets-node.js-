@@ -3,8 +3,8 @@ const app = express()
 
 const path = require('path')
 
-const https = require('https')
-const server = https.createServer(app)
+const http = require('http')
+const server = http.createServer(app)
 
 const { Server } = require('socket.io')
 const io = new Server(server)
@@ -12,15 +12,15 @@ const io = new Server(server)
 const datosDir = path.resolve(__dirname,`../client` )
 
 io.on('connection', (socket)=>{
-
+    console.log('Un usuario se ha conectado')
 
     socket.on('disconnect', ()=>{
        console.log('Un usuario se ha desconectado')
     })
 
-    //socket.on('chat', (msg)=>{
-       // io.emit('chat', msg)
-   //})
+    socket.on('chat', (msg)=>{
+        io.emit('chat', msg)
+   })
 })
 
 app.get('/', (req, res)=> {
